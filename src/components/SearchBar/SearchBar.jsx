@@ -3,20 +3,21 @@ import s from './SearchBar.module.css';
 import { AiOutlineSearch } from "react-icons/ai";
 import toast from 'react-hot-toast';
 
-const SearchBar = () => {
+const SearchBar = ({onSubmit}) => {
     const [value, setValue] = useState('');
+
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const form = e.target;
-        const searchValue = e.target.elements.search.value.trim();
-        
-        if (!searchValue) {
+        if (!value.trim()) {
             toast.error("Enter a search term");
             return;
         }
-        setValue(searchValue);
-        form.reset();
+        onSubmit(value.trim());
+        setValue('');
     };
 
     return (
@@ -28,6 +29,8 @@ const SearchBar = () => {
                     </button>
                     <input
                         className={s.input_search}
+                        onChange={handleChange}
+                        value={value}
                         name="search"
                         type="text"
                         autoComplete="off"
