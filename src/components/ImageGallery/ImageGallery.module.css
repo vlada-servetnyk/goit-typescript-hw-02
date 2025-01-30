@@ -1,0 +1,14 @@
+.gallery {
+    list-style-type: none;
+    padding: 10px 0;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+}
+
+.gallery_item {
+    width: calc((100% - 15px) / 4);
+    height: 250px;
+}
