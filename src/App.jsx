@@ -3,7 +3,7 @@ import './App.css'
 import SearchBar from './components/SearchBar/SearchBar'
 import fetchImages from './services/api';
 import ImageGallery from './components/ImageGallery/ImageGallery';
-import { InfinitySpin } from 'react-loader-spinner';
+import Loader from './components/Loader/Loader';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -34,12 +34,7 @@ function App() {
     <>
       <SearchBar onSubmit={setSearchQuery} />
       <ImageGallery dataImages={images} />
-      {(loading) && <InfinitySpin
-        visible={true}
-        width="200"
-        color="#4800fd"
-        ariaLabel="infinity-spin-loading"
-      />}
+      {(loading) && <Loader />}
     </>
   )
 }
