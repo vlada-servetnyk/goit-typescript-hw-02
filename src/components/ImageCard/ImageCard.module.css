@@ -1,5 +1,12 @@
 .thumb_img {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
     height: 100%;
+    transition: transform 250ms linear;
+}
+.thumb_img:hover {
+    transform: scale(1.05);
 }
 
 .image {
