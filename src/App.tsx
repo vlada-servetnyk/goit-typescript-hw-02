@@ -8,15 +8,23 @@ import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
 import ImageModal from './components/ImageModal/ImageModal';
 
+type Image = {
+  id: string;
+  urls: {
+    small: string;
+    regular: string;
+    };
+  alt_description: string;
+}
 
 function App() {
-  const [images, setImages] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [page, setPage] = useState(0);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [clickImg, setClickImg] = useState(null);
+  const [images, setImages] = useState<Image[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(0);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [clickImg, setClickImg] = useState<Image | null>(null);
 
   useEffect(() => {
 
@@ -26,8 +34,8 @@ function App() {
       try {
         setLoading(true);
         setError(false);
-        const data = await fetchImages(searchQuery, page);
-        setImages(prev => [...prev, ...data]);
+        const data: Image[] = await fetchImages(searchQuery, page);
+        setImages((prev) => [...prev, ...data]);
       } catch {
         setError(true);
       } finally {
@@ -37,7 +45,7 @@ function App() {
     getData();
   }, [searchQuery, page]);
 
-  const searchNewQuery = (newQuery) => {
+  const searchNewQuery = (newQuery: string) => {
     setSearchQuery(newQuery);
     setPage(0);
     setImages([]);
@@ -48,7 +56,7 @@ function App() {
   };
 
   
-  const openModal = (img) => {
+  const openModal = (img: Image) => {
     setClickImg(img);
     setModalIsOpen(true)
   };
