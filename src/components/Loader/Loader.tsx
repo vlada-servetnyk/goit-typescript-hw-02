@@ -5,10 +5,8 @@ const Loader = () => {
   return (
     <div className={s.loader_wrapper}>
       <InfinitySpin
-        visible={true}
         width="200"
         color="#4800fd"
-        ariaLabel="infinity-spin-loading"
       />
     </div>  
     )

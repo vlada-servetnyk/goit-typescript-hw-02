@@ -5,13 +5,14 @@ type Image = {
     id: string;
     urls: {
         small: string;
+        regular: string;
     };
     alt_description: string;
 };
 
 type Props = {
     dataImages: Image[],
-    imgClick: (img: Image) => void
+    imgClick: (img: Image) => void;
 }
 
 const ImageGallery = ({dataImages, imgClick}: Props) => {

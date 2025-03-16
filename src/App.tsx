@@ -22,7 +22,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [clickImg, setClickImg] = useState<Image | null>(null);
 
@@ -34,7 +34,7 @@ function App() {
       try {
         setLoading(true);
         setError(false);
-        const data: Image[] = await fetchImages(searchQuery, page);
+        const data: Image[] = await fetchImages({ query: searchQuery, page });
         setImages((prev) => [...prev, ...data]);
       } catch {
         setError(true);
@@ -47,7 +47,7 @@ function App() {
 
   const searchNewQuery = (newQuery: string) => {
     setSearchQuery(newQuery);
-    setPage(0);
+    setPage(1);
     setImages([]);
   }
 
@@ -71,7 +71,7 @@ function App() {
       <ImageGallery dataImages={images} imgClick={openModal} />
       {(loading) && <Loader />}
       {(error) && <ErrorMessage />}
-      {(images.length > 0) && <LoadMoreBtn onClick={clickLoadMore} />}
+      {(images.length > 0 && images.length >= 20) && <LoadMoreBtn onClick={clickLoadMore} />}
       <ImageModal isOpen={modalIsOpen} onClose={closeModal} img={clickImg} />
     </>
   )
